@@ -2,7 +2,7 @@ import React from "react";
 const Song = ({currentSong})=>{
     return(
    <div className="song-container">
-       <img alt = "song cover image" src={currentSong.cover}></img>
+       <img alt = "song cover" src={currentSong.cover}></img>
        <h2>{currentSong.name}</h2>
        <h3>{currentSong.artist}</h3>
    </div>
