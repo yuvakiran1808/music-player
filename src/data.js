@@ -9,7 +9,7 @@ function chillHop() {
       audio: "https://s9.naasongs.download/tejx139kje6nwp/Radhe%20Shyam%20-%20(2021)/[iSongs.info]%2001%20-%20Radhe%20Shyam%20First%20Glimpse.mp3",
       color: ["#205950", "#2ab3bf"],
       id: uuidv4(),
-      active: false,
+      active: true,
     },
     {
       name: "Ee Raathale",

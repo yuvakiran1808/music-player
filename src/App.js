@@ -8,14 +8,14 @@ import Library from './components/Library';
 import Nav from "./components/Nav";
 //import data
 import data from './data'; 
-// import { playAudio } from './util';
+import { playAudio } from './Util';
 
 function App() {
     //Ref
 const audioRef = useRef(null);
   //state
   const [songs,setSongs] = useState(data());
-  const [currentSong,setCurrentSong] = useState(songs[1]);
+  const [currentSong,setCurrentSong] = useState(songs[0]);
   const [isPlaying,setIsPlaying] = useState(false);
   const [songInfo,setSongInfo] =useState({
     CurrentTime : "",
@@ -31,10 +31,29 @@ const timeUpdateHandler = (e)=>{
 const songEndHandler =  ()=>{
   let currentIndex = songs.findIndex((song)=>song.id===currentSong.id);
   setCurrentSong(songs[(currentIndex+1)%songs.length]);
-  
-  if(isPlaying&&audioRef.paused) audioRef.current.play();
+  activeLibraryHandler(songs[(currentIndex+1)%songs.length]); 
+  playAudio(isPlaying,audioRef);
   
 }; 
+const activeLibraryHandler = (nextPrev)=>{
+  const newSongs = songs.map((song)=>{
+      if(song.id===nextPrev.id)
+      {
+          return{
+              ...song,
+              active:true,
+          }
+      }
+      else{
+          return{
+              ...song,
+              active:false, 
+          }
+      }
+      
+  })
+  setSongs(newSongs);
+};
   return (
 
     <div className={`App ${libraryStatus? 'library-active' :""}`}>
